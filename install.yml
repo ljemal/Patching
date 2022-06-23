@@ -3,11 +3,12 @@
   tasks:
     - name: install apache
       register: updatesys
-      apt:
+      yum:
         name: httpd
         state: present
         update_cache: true
-        cache_valid_time: 3600
+       
+       # cache_valid_time: 3600
       notify: restart apache
     - name: display update
       debug:
