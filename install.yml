@@ -5,8 +5,8 @@
       register: updatesys
       yum:
         name: httpd
-        state: present
-        update_cache: true
+        state: latest
+      #  update_cache: true
        
        # cache_valid_time: 3600
       notify: restart apache
