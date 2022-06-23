@@ -2,11 +2,16 @@
   hosts: all
   tasks:
     - name: install apache
-      yum:
+      register: updatesys
+      apt:
         name: httpd
-        state: latest
-      when: httpd_version!='latest'
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
       notify: restart apache
+    - name: display update
+      debug:
+        msg: "{{updatesys.stdout_lines|last}}"
     - name: enable apache
       service:
         name: httpd
