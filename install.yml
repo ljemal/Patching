@@ -1,28 +1,13 @@
 - name: install older version of apache
-  hosts: all
+  hosts: east
   tasks:
     - name: install apache
-      register: updatesys
       yum:
         name: httpd
         state: latest
-      #  update_cache: true
-       
-       # cache_valid_time: 3600
+        update_cache: yes
       notify: restart apache
-    - name: display update
-      debug:
-        msg: "{{updatesys.stdout_lines|last}}"
-    - name: enable apache
-      service:
-        name: httpd
-        state: started
-    - name: create firewall rule
-      firewalld:
-        service: http
-        permanent: true
-        immediate: true
-        state: enabled
+      
   handlers:
     - name: restart apache
       service:
