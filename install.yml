@@ -1,5 +1,5 @@
 - name: install older version of apache
-  hosts: east
+  hosts: web
   tasks:
     - name: install apache
       yum:
